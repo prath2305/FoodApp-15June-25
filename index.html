@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food App by Prathamesh</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #a8edea, #fed6e3);
+      font-family: Cambria, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    label {
+      font-size: 24px;
+      display: block;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    input[type="text"] {
+      font-size: 22px;
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 25px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+      padding-left: 20px;
+      margin-bottom: 30px;
+    }
+
+    .options label {
+      font-size: 22px;
+      color: #555;
+    }
+
+    input[type="submit"] {
+      font-size: 24px;
+      background-color: #007bff;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    #msg {
+      margin-top: 30px;
+      font-size: 24px;
+      color: green;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+
+      input[type="text"], input[type="submit"] {
+        font-size: 20px;
+      }
+
+      label {
+        font-size: 20px;
+      }
+
+      #msg {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Food App</h1>
+    <form onsubmit="show()">
+      <label for="name">Enter Your Name</label>
+      <input type="text" id="name" />
+
+      <label>Select Food</label>
+      <div class="options">
+        <label><input type="radio" name="f" id="ni"> North Indian</label>
+        <label><input type="radio" name="f" id="si"> South Indian</label>
+        <label><input type="radio" name="f" id="ff" checked> Fast Food</label>
+      </div>
+
+      <input type="submit" value="Submit" />
+    </form>
+    <h2 id="msg"></h2>
+  </div>
+
+  <script>
+    function show() {
+      event.preventDefault();
+
+      let name = document.getElementById("name");
+      let msg = document.getElementById("msg");
+      let ni = document.getElementById("ni");
+      let si = document.getElementById("si");
+      let ff = document.getElementById("ff");
+
+      if (name.value === "") {
+        alert("Name cannot be empty");
+        msg.innerHTML = "";
+        name.focus();
+        return;
+      }
+
+      if (name.value.trim() === "") {
+        alert("Name can't be blank spaces");
+        msg.innerHTML = "";
+        name.value = "";
+        name.focus();
+        return;
+      }
+
+      if (!name.value.match(/^[A-Za-z ]+$/)) {
+        alert("Name should contain only alphabets");
+        msg.innerHTML = "";
+        name.value = "";
+        name.focus();
+        return;
+      }
+
+      let choice = "";
+      if (ni.checked) choice = "North Indian";
+      else if (si.checked) choice = "South Indian";
+      else choice = "Fast Food";
+
+      let ans = "Name: " + name.value + "<br>Choice: " + choice;
+      msg.innerHTML = ans;
+    }
+  </script>
+</body>
+</html>
